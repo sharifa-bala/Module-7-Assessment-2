@@ -1,0 +1,102 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td colspan="4">
+                    <input type="text" id="inputBox" value="0" />
+                </td>
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(7)">7</td>
+                <td onclick="digitBtnPressed(8)">8</td>
+                <td onclick="digitBtnPressed(9)">9</td>
+                <td onclick="operatorBtnPressed('x')">x</td>
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(4)">4</td>
+                <td onclick="digitBtnPressed(5)">5</td>
+                <td onclick="digitBtnPressed(6)">6</td>
+                <td onclick="operatorBtnPressed('-')">-</td>
+            </tr>
+            <tr>
+                <td onclick="digitBtnPressed(1)">1</td>
+                <td onclick="digitBtnPressed(2)">2</td>
+                <td onclick="digitBtnPressed(3)">3</td>
+                <td onclick="operatorBtnPressed('+')">+</td>
+            </tr>
+            <tr>
+                <td colspan="2" onclick="digitBtnPressed(0)">0</td>
+                <td onclick="btnACPressed()">AC</td>
+                <td onclick="operatorBtnPressed('/')">/</td>
+            </tr>
+            <tr>
+                <td colspan="4" onclick="calculateResult()">=</td>
+            </tr>
+        </table>
+
+        <script>
+            var newline = true;
+            var storedValue = null;
+            var storedOperator = null;
+
+            function digitBtnPressed(button) {
+                if (newline) {
+                    document.getElementById("inputBox").value = button;
+                    newline = false;
+                } else {
+                    var currentValue = document.getElementById("inputBox").value;
+                    document.getElementById("inputBox").value = currentValue + button;
+                }
+            }
+
+            function operatorBtnPressed(operator) {
+                storedValue = parseFloat(document.getElementById("inputBox").value);
+                storedOperator = operator;
+                newline = true;
+            }
+
+            function btnACPressed() {
+                document.getElementById("inputBox").value = 0;
+                storedValue = null;
+                storedOperator = null;
+                newline = true;
+            }
+
+            function calculateResult() {
+                try {
+                    var currentValue = parseFloat(document.getElementById("inputBox").value);
+                    var result;
+
+                    if (storedValue !== null && storedOperator) {
+                        switch (storedOperator) {
+                            case '+':
+                                result = storedValue + currentValue;
+                                break;
+                            case '-':
+                                result = storedValue - currentValue;
+                                break;
+                            case 'x':
+                                result = storedValue * currentValue;
+                                break;
+                            case '/':
+                                result = storedValue / currentValue;
+                                break;
+                            default:
+                                result = currentValue;
+                        }
+
+                        document.getElementById("inputBox").value = result;
+                        storedValue = null;
+                        storedOperator = null;
+                        newline = true;
+                    }
+                } catch (error) {
+                    document.getElementById("inputBox").value = "Error";
+                }
+            }
+        </script>
+    </body>
+</html>

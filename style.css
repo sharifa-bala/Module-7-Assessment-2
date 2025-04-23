@@ -1,0 +1,118 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Calculator table styling */
+table {
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 400px;
+}
+
+td {
+    width: 25%;
+    height: 60px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.5rem;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #ddd;
+    transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+/* Input box styling */
+td[colspan="4"] {
+    height: 80px;
+    padding: 10px;
+}
+
+#inputBox {
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
+    text-align: right;
+    border: none;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    box-sizing: border-box;
+    outline: none;
+}
+
+/* Button Colors */
+/* Numbers: Light Grey */
+td:not([onclick*="operatorBtnPressed"]):not([onclick="btnACPressed()"]):not([onclick="calculateResult()"]) {
+    background-color: #d3d3d3;
+}
+
+td:not([onclick*="operatorBtnPressed"]):not([onclick="btnACPressed()"]):not([onclick="calculateResult()"]):hover {
+    background-color: #bcbcbc;
+}
+
+/* Operators and Equals: Orange */
+td[onclick*="operatorBtnPressed"], 
+td[onclick="calculateResult()"] {
+    background-color: #ff9800;
+    color: white;
+    font-weight: bold;
+}
+
+td[onclick*="operatorBtnPressed"]:hover, 
+td[onclick="calculateResult()"]:hover {
+    background-color: #e68900;
+}
+
+/* AC Button: Black */
+td[onclick="btnACPressed()"] {
+    background-color: #333;
+    color: white;
+    font-weight: bold;
+}
+
+td[onclick="btnACPressed()"]:hover {
+    background-color: #222;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    td {
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    td[colspan="4"] {
+        height: 60px;
+    }
+    #inputBox {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    table {
+        width: 100%;
+    }
+    td {
+        height: 45px;
+        font-size: 1rem;
+    }
+    td[colspan="4"] {
+        height: 50px;
+    }
+    #inputBox {
+        font-size: 1.2rem;
+    }
+}
+
+
